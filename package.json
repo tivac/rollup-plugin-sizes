@@ -1,0 +1,29 @@
+{
+  "name": "rollup-plugin-sizes",
+  "version": "1.0.0",
+  "description": "Show info about files/packages included with your rollup bundle",
+  "main": "index.js",
+  "keywords": [],
+  "author": "Pat Cavit <npm@patcavit.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^3.3.1",
+    "eslint-config-arenanet": "^3.0.1"
+  },
+  "dependencies": {
+    "filesize": "^3.3.0",
+    "lodash.assign": "^4.2.0",
+    "lodash.foreach": "^4.5.0",
+    "lodash.sumby": "^4.6.0",
+    "module-details-from-path": "^1.0.3"
+  },
+  "eslintConfig": {
+    "extends": "arenanet",
+    "env": {
+      "node": true
+    },
+    "rules": {
+      "no-console": "off"
+    }
+  }
+}
