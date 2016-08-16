@@ -12,7 +12,8 @@
   "keywords": [
     "rollup",
     "filesizes",
-    "bundler"
+    "bundler",
+    "rollup-plugin"
   ],
   "author": "Pat Cavit <npm@patcavit.com>",
   "license": "MIT",
