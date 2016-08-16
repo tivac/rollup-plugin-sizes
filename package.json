@@ -3,7 +3,14 @@
   "version": "1.0.0",
   "description": "Show info about files/packages included with your rollup bundle",
   "main": "index.js",
-  "keywords": [],
+  "scripts": {
+      "test": "eslint ."
+  },
+  "keywords": [
+      "rollup",
+      "filesizes",
+      "bundler"
+    ],
   "author": "Pat Cavit <npm@patcavit.com>",
   "license": "MIT",
   "devDependencies": {
@@ -23,7 +30,8 @@
       "node": true
     },
     "rules": {
-      "no-console": "off"
+      "no-console": "off",
+      "prefer-template": "off"
     }
   }
 }
