@@ -42,10 +42,7 @@ rollup.rollup({
         sizes()
     ]
 }).then(function(bundle) {
-    return bundle.write({
-        format : "cjs",
-        dest   : "dist/bundle.js"
-    });
+    ...
 });
 ```
 
@@ -56,9 +53,7 @@ import buble from 'rollup-plugin-buble';
 import sizes from 'rollup-plugin-sizes';
 
 export default {
-    entry   : "src/main.js",
-    dest    : "dist/bundle.js",
-    format  : "cjs",
+    ...
     plugins : [
         buble(),
         sizes()
