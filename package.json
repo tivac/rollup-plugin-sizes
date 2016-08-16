@@ -6,7 +6,8 @@
   "scripts": {
     "test": "eslint .",
     "publish-please": "publish-please",
-    "prepublish": "publish-please guard"
+    "prepublish": "publish-please guard",
+    "preversion": "npm test"
   },
   "keywords": [
     "rollup",
