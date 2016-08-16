@@ -3,6 +3,10 @@
   "version": "0.2.2",
   "description": "Show info about files/packages included with your rollup bundle",
   "main": "index.js",
+  "repository": "tivac/rollup-plugin-sizes",
+  "bugs": {
+    "url": "https://github.com/tivac/rollup-plugin-sizes/issues"
+  },
   "scripts": {
     "test": "eslint .",
     "publish-please": "publish-please",
