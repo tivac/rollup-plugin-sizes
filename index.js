@@ -9,18 +9,19 @@ var path = require("path"),
     filesize = require("filesize");
  
 module.exports = function(options) {
-    var base;
+    var entry, base;
 
     if(!options) {
         options = false;
     }
-    
+
     return {
         name : "rollup-plugin-sizes",
 
         // Grab the basedir by inspecting the entry file
         options : function(config) {
-            base = path.dirname(config.entry);
+            entry = config.entry;
+            base  = path.dirname(config.entry);
         },
 
         // Spit out stats during bundle generation
@@ -71,7 +72,7 @@ module.exports = function(options) {
                 return b.size - a.size;
             });
 
-            console.log("Bundle Contents:");
+            console.log("%s:", entry);
 
             totals.forEach(function(item) {
                 console.log(
