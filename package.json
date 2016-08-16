@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-sizes",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Show info about files/packages included with your rollup bundle",
   "main": "index.js",
   "scripts": {
