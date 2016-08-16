@@ -9,45 +9,52 @@ var path = require("path"),
     filesize = require("filesize");
  
 module.exports = function(options) {
-    var data  = {},
-        total = 0,
-        base;
+    var entry, base;
 
     if(!options) {
         options = false;
-    }
-    
-    function add(details, size) {
-        if(!(details.name in data)) {
-            data[details.name] = [];
-        }
-
-        total += size;
-
-        data[details.name].push(assign(details, { size : size }));
     }
 
     return {
         name : "rollup-plugin-sizes",
 
+        // Grab the basedir by inspecting the entry file
         options : function(config) {
-            base = path.dirname(config.entry);
-        },
-
-        // Watch files as they're added
-        transform : function(contents, file) {
-            var details = parse(file) || {
-                    name    : "app",
-                    basedir : base,
-                    path    : path.relative(base, file)
-                };
-
-            add(details, contents.length);
+            entry = config.entry;
+            base  = path.dirname(config.entry);
         },
 
         // Spit out stats during bundle generation
-        ongenerate : function() {
-            var totals = [];
+        ongenerate : function(details, result) {
+            var data   = {},
+                totals = [];
+
+            details.bundle.modules.forEach(function(module) {
+                var parsed = parse(module.id);
+                
+                if(!parsed) {
+                    // Handle rollup-injected helpers
+                    if(module.id.indexOf("\u0000") === 0) {
+                        parsed = {
+                            name    : "rollup helpers",
+                            basedir : "",
+                            path    : module.id.replace("\u0000", "")
+                        };
+                    } else {
+                        parsed = {
+                            name    : "app",
+                            basedir : base,
+                            path    : path.relative(base, module.id)
+                        };
+                    }
+                }
+
+                if(!(parsed.name in data)) {
+                    data[parsed.name] = [];
+                }
+
+                data[parsed.name].push(assign(parsed, { size : module.code.length }));
+            });
             
             // Sum all files in each chunk
             each(data, function(files, name) {
@@ -56,7 +63,7 @@ module.exports = function(options) {
                 totals.push({
                     name    : name,
                     size    : size,
-                    percent : (size / total) * 100
+                    percent : (size / result.code.length) * 100
                 });
             });
 
@@ -65,15 +72,29 @@ module.exports = function(options) {
                 return b.size - a.size;
             });
 
-            console.log("Bundle Contents:");
+            console.log("%s:", entry);
 
             totals.forEach(function(item) {
                 console.log(
-                    "%s - %s (%s)",
+                    "%s - %s (%s%%)",
                     item.name,
                     filesize(item.size),
-                    item.percent.toFixed(2) + "%"
+                    item.percent.toFixed(2)
                 );
+
+                if(options.details) {
+                    data[item.name].sort(function(a, b) {
+                        return b.size - a.size;
+                    })
+                    .forEach(function(file) {
+                        console.log(
+                            "\t%s - %s (%s%%)",
+                            file.path,
+                            filesize(file.size),
+                            ((file.size / item.size) * 100).toFixed(2)
+                        );
+                    });
+                }
             });
         }
     };
