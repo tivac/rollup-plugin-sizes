@@ -4,18 +4,21 @@
   "description": "Show info about files/packages included with your rollup bundle",
   "main": "index.js",
   "scripts": {
-      "test": "eslint ."
+    "test": "eslint .",
+    "publish-please": "publish-please",
+    "prepublish": "publish-please guard"
   },
   "keywords": [
-      "rollup",
-      "filesizes",
-      "bundler"
-    ],
+    "rollup",
+    "filesizes",
+    "bundler"
+  ],
   "author": "Pat Cavit <npm@patcavit.com>",
   "license": "MIT",
   "devDependencies": {
     "eslint": "^3.3.1",
-    "eslint-config-arenanet": "^3.0.1"
+    "eslint-config-arenanet": "^3.0.1",
+    "publish-please": "^2.2.0"
   },
   "dependencies": {
     "filesize": "^3.3.0",
