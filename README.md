@@ -10,12 +10,35 @@ rollup-plugin-sizes [![NPM Version](https://img.shields.io/npm/v/rollup-plugin-s
 Simple analysis on rollup bundling, helping you to spot libaries bloating up your bundles.
 
 ```
-Bundle Contents:
-codemirror - 445.33 KB (33.68%)
-remarkable - 189.54 KB (14.33%)
-lodash._baseiteratee - 112.48 KB (8.51%)
-app - 93.59 KB (7.08%)
-autolinker - 81.63 KB (6.17%)
+/src/index.js:
+codemirror - 446.92 KB (35.94%)
+remarkable - 193.72 KB (15.58%)
+app - 95.87 KB (7.71%)
+autolinker - 81.64 KB (6.57%)
+lodash.filter - 62.77 KB (5.05%)
+...
+```
+
+or with way more details!
+
+```
+/src/index.js:
+codemirror - 446.92 KB (35.94%)
+        lib\codemirror.js - 347.8 KB (77.82%)
+        mode\javascript\javascript.js - 27.78 KB (6.22%)
+        mode\markdown\markdown.js - 25.54 KB (5.72%)
+        mode\meta.js - 14.44 KB (3.23%)
+        mode\xml\xml.js - 12.52 KB (2.80%)
+        addon\edit\closebrackets.js - 7.04 KB (1.58%)
+        addon\edit\matchbrackets.js - 5.39 KB (1.21%)
+        addon\comment\continuecomment.js - 3.59 KB (0.80%)
+        addon\selection\active-line.js - 2.82 KB (0.63%)
+remarkable - 193.72 KB (15.58%)
+        lib\common\entities.js - 46.44 KB (23.97%)
+        lib\rules.js - 10.2 KB (5.26%)
+        lib\rules_block\list.js - 6.65 KB (3.43%)
+        lib\ruler.js - 5.44 KB (2.81%)
+        lib\rules_block\deflist.js - 5.22 KB (2.69%)
 ...
 ```
 
@@ -60,7 +83,12 @@ export default {
     ]
 };
 ```
-## A Note on Versioning ##
+
+## Options
+
+`details` - Set to true to enable file-by-file breakdowns of space usage.
+
+## A Note on Versioning
 
 This project's version number currently has a "0.x" prefix, indicating that it's a young
 project under heavy development. **As long as the version number starts with

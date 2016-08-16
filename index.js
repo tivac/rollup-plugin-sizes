@@ -18,7 +18,7 @@ module.exports = function(options) {
     return {
         name : "rollup-plugin-sizes",
 
-        // Grab the basedir by inspecting the entry file
+        // Grab some needed bits out of the options
         options : function(config) {
             entry = config.entry;
             base  = path.dirname(config.entry);
