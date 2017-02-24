@@ -2,13 +2,12 @@
 
 var path = require("path"),
     
-    assign   = require("lodash.assign"),
     each     = require("lodash.foreach"),
     sum      = require("lodash.sumby"),
     parse    = require("module-details-from-path"),
     filesize = require("filesize");
  
-module.exports = function(options) {
+module.exports = (options) => {
     var entry, base;
 
     if(!options) {
@@ -19,28 +18,31 @@ module.exports = function(options) {
         name : "rollup-plugin-sizes",
 
         // Grab some needed bits out of the options
-        options : function(config) {
+        options : (config) => {
             entry = config.entry;
             base  = path.dirname(config.entry);
         },
 
         // Spit out stats during bundle generation
-        ongenerate : function(details, result) {
+        ongenerate : (details) => {
             var data   = {},
-                totals = [];
+                totals = [],
+                total  = 0;
 
-            details.bundle.modules.forEach(function(module) {
-                var parsed = parse(module.id);
+            details.bundle.modules.forEach((module) => {
+                var parsed;
                 
-                if(!parsed) {
-                    // Handle rollup-injected helpers
-                    if(module.id.indexOf("\u0000") === 0) {
-                        parsed = {
-                            name    : "rollup helpers",
-                            basedir : "",
-                            path    : module.id.replace("\u0000", "")
-                        };
-                    } else {
+                // Handle rollup-injected helpers
+                if(module.id.indexOf("\u0000") === 0) {
+                    parsed = {
+                        name    : "rollup helpers",
+                        basedir : "",
+                        path    : module.id.replace("\u0000", "")
+                    };
+                } else {
+                    parsed = parse(module.id);
+                
+                    if(!parsed) {
                         parsed = {
                             name    : "app",
                             basedir : base,
@@ -53,47 +55,43 @@ module.exports = function(options) {
                     data[parsed.name] = [];
                 }
 
-                data[parsed.name].push(assign(parsed, { size : module.code.length }));
+                data[parsed.name].push(Object.assign(parsed, { size : module.code.length }));
             });
-            
+
             // Sum all files in each chunk
-            each(data, function(files, name) {
+            each(data, (files, name) => {
                 var size = sum(files, "size");
+
+                total += size;
                 
                 totals.push({
-                    name    : name,
-                    size    : size,
-                    percent : (size / result.code.length) * 100
+                    name,
+                    size
                 });
             });
 
             // Sort
-            totals.sort(function(a, b) {
-                return b.size - a.size;
-            });
+            totals.sort((a, b) => b.size - a.size);
 
             console.log("%s:", entry);
 
-            totals.forEach(function(item) {
+            totals.forEach((item) => {
                 console.log(
                     "%s - %s (%s%%)",
                     item.name,
                     filesize(item.size),
-                    item.percent.toFixed(2)
+                    ((item.size / total) * 100).toFixed(2)
                 );
 
                 if(options.details) {
-                    data[item.name].sort(function(a, b) {
-                        return b.size - a.size;
-                    })
-                    .forEach(function(file) {
-                        console.log(
+                    data[item.name]
+                        .sort((a, b) => b.size - a.size)
+                        .forEach((file) => console.log(
                             "\t%s - %s (%s%%)",
                             file.path,
                             filesize(file.size),
                             ((file.size / item.size) * 100).toFixed(2)
-                        );
-                    });
+                        ));
                 }
             });
         }
