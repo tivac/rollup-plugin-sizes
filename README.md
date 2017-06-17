@@ -54,7 +54,7 @@ Add to your rollup build as the last plugin via JS API or Config file.
 
 ```js
 var rollup = require("rollup"),
-    
+
     buble = require("rollup-plugin-buble"),
     sizes = require("rollup-plugin-sizes");
 
@@ -87,6 +87,8 @@ export default {
 ## Options
 
 `details` - Set to true to enable file-by-file breakdowns of space usage.
+
+`report` - Customize reporting. See [source code](index.js) for the default reporter.
 
 ## A Note on Versioning
 
