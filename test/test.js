@@ -6,7 +6,9 @@ rollup({
     entry : "./test/specimens/entry.js",
 
     plugins : [
-        require("../index.js")()
+        require("../index.js")({
+            details : true
+        })
     ]
 })
 .then((bundle) => {

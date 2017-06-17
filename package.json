@@ -8,9 +8,10 @@
     "url": "https://github.com/tivac/rollup-plugin-sizes/issues"
   },
   "scripts": {
-    "test": "eslint .",
-    "publish-please": "publish-please",
-    "prepublish": "publish-please guard",
+    "lint": "eslint .",
+    "release": "npm version -m \"v%s\"",
+    "test": "node ./test/test.js",
+    "posttest": "npm run lint",
     "preversion": "npm test"
   },
   "keywords": [
@@ -22,14 +23,12 @@
   "author": "Pat Cavit <npm@patcavit.com>",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^3.3.1",
-    "eslint-config-arenanet": "^3.0.1",
-    "publish-please": "^2.2.0",
-    "rollup": "^0.41.4"
+    "eslint": "^4.0.0",
+    "eslint-config-arenanet": "^3.3.1",
+    "rollup": "^0.43.0"
   },
   "dependencies": {
-    "filesize": "^3.3.0",
-    "lodash.assign": "^4.2.0",
+    "filesize": "^3.5.10",
     "lodash.foreach": "^4.5.0",
     "lodash.sumby": "^4.6.0",
     "module-details-from-path": "^1.0.3"
