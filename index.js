@@ -1,18 +1,46 @@
 "use strict";
 
 var path = require("path"),
-    
+
     each     = require("lodash.foreach"),
     sum      = require("lodash.sumby"),
     parse    = require("module-details-from-path"),
     filesize = require("filesize");
- 
+
+function defaultReport({ entry, data, totals, total, options }) {
+    // Sort
+    totals.sort((a, b) => b.size - a.size);
+    console.log("%s:", entry);
+
+    totals.forEach((item) => {
+        console.log(
+            "%s - %s (%s%%)",
+            item.name,
+            filesize(item.size),
+            ((item.size / total) * 100).toFixed(2)
+        );
+
+        if(options.details) {
+            data[item.name]
+                .sort((a, b) => b.size - a.size)
+                .forEach((file) => console.log(
+                    "\t%s - %s (%s%%)",
+                    file.path,
+                    filesize(file.size),
+                    ((file.size / item.size) * 100).toFixed(2)
+                ));
+        }
+    });
+}
+
 module.exports = (options) => {
-    var entry, base;
+    var entry, base, report;
 
     if(!options) {
         options = false;
     }
+
+    report = (options && options.report) || defaultReport;
 
     return {
         name : "rollup-plugin-sizes",
@@ -27,11 +55,11 @@ module.exports = (options) => {
         ongenerate : (details) => {
             var data   = {},
                 totals = [],
-                total  = 0;
+                total = 0;
 
             details.bundle.modules.forEach((module) => {
                 var parsed;
-                
+
                 // Handle rollup-injected helpers
                 if(module.id.indexOf("\u0000") === 0) {
                     parsed = {
@@ -41,7 +69,7 @@ module.exports = (options) => {
                     };
                 } else {
                     parsed = parse(module.id);
-                
+
                     if(!parsed) {
                         parsed = {
                             name    : "app",
@@ -63,37 +91,14 @@ module.exports = (options) => {
                 var size = sum(files, "size");
 
                 total += size;
-                
+
                 totals.push({
                     name,
                     size
                 });
             });
 
-            // Sort
-            totals.sort((a, b) => b.size - a.size);
-
-            console.log("%s:", entry);
-
-            totals.forEach((item) => {
-                console.log(
-                    "%s - %s (%s%%)",
-                    item.name,
-                    filesize(item.size),
-                    ((item.size / total) * 100).toFixed(2)
-                );
-
-                if(options.details) {
-                    data[item.name]
-                        .sort((a, b) => b.size - a.size)
-                        .forEach((file) => console.log(
-                            "\t%s - %s (%s%%)",
-                            file.path,
-                            filesize(file.size),
-                            ((file.size / item.size) * 100).toFixed(2)
-                        ));
-                }
-            });
+            report({ entry, data, totals, total, options });
         }
     };
 };
