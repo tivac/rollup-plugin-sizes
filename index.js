@@ -7,21 +7,23 @@ var path = require("path"),
     parse    = require("module-details-from-path"),
     filesize = require("filesize");
 
-function defaultReport({ entry, data, totals, total, options }) {
+function defaultReport(details) {
+    var args = Object.assign({}, details);
+    
     // Sort
-    totals.sort((a, b) => b.size - a.size);
-    console.log("%s:", entry);
+    args.totals.sort((a, b) => b.size - a.size);
+    console.log("%s:", args.entry);
 
-    totals.forEach((item) => {
+    args.totals.forEach((item) => {
         console.log(
             "%s - %s (%s%%)",
             item.name,
             filesize(item.size),
-            ((item.size / total) * 100).toFixed(2)
+            ((item.size / args.total) * 100).toFixed(2)
         );
 
-        if(options.details) {
-            data[item.name]
+        if(args.options.details) {
+            args.data[item.name]
                 .sort((a, b) => b.size - a.size)
                 .forEach((file) => console.log(
                     "\t%s - %s (%s%%)",
@@ -98,7 +100,13 @@ module.exports = (options) => {
                 });
             });
 
-            report({ entry, data, totals, total, options });
+            report({
+                entry,
+                data,
+                totals,
+                total,
+                options
+            });
         }
     };
 };
