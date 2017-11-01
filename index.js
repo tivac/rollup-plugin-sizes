@@ -12,7 +12,7 @@ function defaultReport(details) {
     
     // Sort
     args.totals.sort((a, b) => b.size - a.size);
-    console.log("%s:", args.entry);
+    console.log("%s:", args.input);
 
     args.totals.forEach((item) => {
         console.log(
@@ -36,7 +36,7 @@ function defaultReport(details) {
 }
 
 module.exports = (options) => {
-    var entry, base, report;
+    var input, base, report;
 
     if(!options) {
         options = false;
@@ -49,8 +49,8 @@ module.exports = (options) => {
 
         // Grab some needed bits out of the options
         options : (config) => {
-            entry = config.entry;
-            base  = path.dirname(config.entry);
+            input = config.input;
+            base  = path.dirname(config.input);
         },
 
         // Spit out stats during bundle generation
@@ -101,7 +101,7 @@ module.exports = (options) => {
             });
 
             report({
-                entry,
+                input,
                 data,
                 totals,
                 total,
