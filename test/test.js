@@ -3,7 +3,7 @@
 var rollup = require("rollup").rollup;
 
 rollup({
-    entry : "./test/specimens/entry.js",
+    input : "./test/specimens/entry.js",
 
     plugins : [
         require("../index.js")({
@@ -13,4 +13,9 @@ rollup({
 })
 .then((bundle) => {
     bundle.generate({ format : "es" });
+})
+.catch((error) => {
+    console.error(error.toString());
+
+    process.exitCode = 1;
 });
