@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`rollup-plugin-sizes single-entry bundle should show basic output 1`] = `
-"./test/specimens/entry.js:
-app - 360 B (100.00%)
+"./test/specimens/single-input-output/a.js:
+app - 65 B (100.00%)
 "
 `;
 
 exports[`rollup-plugin-sizes single-entry bundle should show detailed output  1`] = `
-"./test/specimens/entry.js:
-app - 360 B (100.00%)
-	maths.js - 288 B (80.00%)
-	entry.js - 72 B (20.00%)
+"./test/specimens/single-input-output/a.js:
+app - 65 B (100.00%)
+	a.js - 44 B (67.69%)
+	b.js - 21 B (32.31%)
 "
 `;

@@ -18,7 +18,7 @@ describe("rollup-plugin-sizes", () => {
     describe("single-entry bundle", () => {
         it("should show basic output", () =>
             rollup({
-                input : "./test/specimens/entry.js",
+                input : "./test/specimens/single-input-output/a.js",
 
                 plugins : [
                     require("../index.js")({
@@ -32,7 +32,7 @@ describe("rollup-plugin-sizes", () => {
 
         it("should show detailed output ", () =>
             rollup({
-                input : "./test/specimens/entry.js",
+                input : "./test/specimens/single-input-output/a.js",
 
                 plugins : [
                     require("../index.js")({
