@@ -35,7 +35,7 @@ function defaultReport(details) {
 }
 
 module.exports = (options) => {
-    var input, base, report, log;
+    var input, base, report, log, output;
 
     if(!options) {
         options = false;
@@ -53,12 +53,22 @@ module.exports = (options) => {
             base  = path.dirname(config.input);
         },
 
+        // Don't actually provide a load hook, just use it to reset the output
+        // flag every time the build is re-run
+        load : () => {
+            output = false;
+        },
+
         // Spit out stats during bundle generation
         ongenerate : (details) => {
             var data   = {},
                 totals = [],
                 total = 0;
             
+            if(output) {
+                return false;
+            }
+
             details.bundle.modules.forEach((module) => {
                 var parsed;
 
@@ -100,7 +110,9 @@ module.exports = (options) => {
                 });
             });
 
-            report({
+            output = true;
+
+            return report({
                 input,
                 data,
                 totals,
