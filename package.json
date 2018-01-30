@@ -10,7 +10,7 @@
   "scripts": {
     "lint": "eslint .",
     "release": "npm version -m \"v%s\"",
-    "test": "node ./test/test.js",
+    "test": "jest",
     "preversion": "npm test"
   },
   "keywords": [
@@ -36,7 +36,8 @@
   "eslintConfig": {
     "extends": "arenanet",
     "env": {
-      "node": true
+      "node": true,
+      "jest": true
     },
     "rules": {
       "no-console": "off",

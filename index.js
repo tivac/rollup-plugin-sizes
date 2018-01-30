@@ -8,24 +8,23 @@ var path = require("path"),
     filesize = require("filesize");
 
 function defaultReport(details) {
-    var args = Object.assign({}, details);
-    
     // Sort
-    args.totals.sort((a, b) => b.size - a.size);
-    console.log("%s:", args.input);
+    details.totals.sort((a, b) => b.size - a.size);
+    
+    details.log("%s:", details.input);
 
-    args.totals.forEach((item) => {
-        console.log(
+    details.totals.forEach((item) => {
+        details.log(
             "%s - %s (%s%%)",
             item.name,
             filesize(item.size),
-            ((item.size / args.total) * 100).toFixed(2)
+            ((item.size / details.total) * 100).toFixed(2)
         );
 
-        if(args.options.details) {
-            args.data[item.name]
+        if(details.options.details) {
+            details.data[item.name]
                 .sort((a, b) => b.size - a.size)
-                .forEach((file) => console.log(
+                .forEach((file) => details.log(
                     "\t%s - %s (%s%%)",
                     file.path,
                     filesize(file.size),
@@ -36,13 +35,14 @@ function defaultReport(details) {
 }
 
 module.exports = (options) => {
-    var input, base, report;
+    var input, base, report, log;
 
     if(!options) {
         options = false;
     }
 
-    report = (options && options.report) || defaultReport;
+    report = options.report || defaultReport;
+    log    = options.log || console.log;
 
     return {
         name : "rollup-plugin-sizes",
@@ -58,7 +58,7 @@ module.exports = (options) => {
             var data   = {},
                 totals = [],
                 total = 0;
-
+            
             details.bundle.modules.forEach((module) => {
                 var parsed;
 
@@ -105,7 +105,8 @@ module.exports = (options) => {
                 data,
                 totals,
                 total,
-                options
+                options,
+                log
             });
         }
     };
