@@ -25,13 +25,15 @@
     "eslint": "^4.16.0",
     "eslint-config-arenanet": "^3.3.1",
     "jest": "^22.1.4",
-    "rollup": "^0.55.1"
+    "rollup": "^0.55.1",
+    "rollup-plugin-node-resolve": "^3.0.2"
   },
   "dependencies": {
     "filesize": "^3.5.11",
     "lodash.foreach": "^4.5.0",
     "lodash.sumby": "^4.6.0",
-    "module-details-from-path": "^1.0.3"
+    "module-details-from-path": "^1.0.3",
+    "slash": "^1.0.0"
   },
   "eslintConfig": {
     "extends": "arenanet",

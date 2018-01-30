@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rollup-plugin-sizes node_modules support should show basic output 1`] = `
+"Details for \\"bundle:\\"
+	rollup - 766.36 KB (99.99%)
+	bundle - 58 B (0.01%)
+"
+`;
+
+exports[`rollup-plugin-sizes node_modules support should show detailed output  1`] = `
+"Details for \\"bundle:\\"
+	rollup - 766.36 KB (99.99%)
+		dist/rollup.es.js - 766.36 KB (100.00%)
+	bundle - 58 B (0.01%)
+		a.js - 58 B (100.00%)
+"
+`;

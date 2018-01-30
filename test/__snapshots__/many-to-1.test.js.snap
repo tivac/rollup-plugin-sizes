@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rollup-plugin-sizes multiple-entry, single-output bundle should show basic output 1`] = `
+"Details for \\"./chunk1.js:\\"
+	./chunk1.js - 21 B (100.00%)
+Details for \\"./a.js:\\"
+	./a.js - 44 B (100.00%)
+Details for \\"./c.js:\\"
+	./c.js - 113 B (100.00%)
+"
+`;
+
+exports[`rollup-plugin-sizes multiple-entry, single-output bundle should show detailed output  1`] = `
+"Details for \\"./chunk1.js:\\"
+	./chunk1.js - 21 B (100.00%)
+		b.js - 21 B (100.00%)
+Details for \\"./a.js:\\"
+	./a.js - 44 B (100.00%)
+		a.js - 44 B (100.00%)
+Details for \\"./c.js:\\"
+	./c.js - 113 B (100.00%)
+		c.js - 92 B (81.42%)
+		d.js - 21 B (18.58%)
+"
+`;
+
+exports[`rollup-plugin-sizes multiple-entry, single-output bundle w/ dynamic imports should show basic output 1`] = `
+"Details for \\"./chunk1.js:\\"
+	./chunk1.js - 21 B (100.00%)
+Details for \\"./a.js:\\"
+	./a.js - 44 B (100.00%)
+Details for \\"./e.js:\\"
+	./e.js - 37 B (100.00%)
+Details for \\"./c.js:\\"
+	./c.js - 113 B (100.00%)
+"
+`;
+
+exports[`rollup-plugin-sizes multiple-entry, single-output bundle w/ dynamic imports should show detailed output  1`] = `
+"Details for \\"./chunk1.js:\\"
+	./chunk1.js - 21 B (100.00%)
+		b.js - 21 B (100.00%)
+Details for \\"./a.js:\\"
+	./a.js - 44 B (100.00%)
+		a.js - 44 B (100.00%)
+Details for \\"./e.js:\\"
+	./e.js - 37 B (100.00%)
+		e.js - 37 B (100.00%)
+Details for \\"./c.js:\\"
+	./c.js - 113 B (100.00%)
+		c.js - 92 B (81.42%)
+		d.js - 21 B (18.58%)
+"
+`;

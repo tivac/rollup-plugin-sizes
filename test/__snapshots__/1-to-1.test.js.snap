@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rollup-plugin-sizes single-entry, single-output bundle should show basic output 1`] = `
+"Details for \\"bundle:\\"
+	bundle - 65 B (100.00%)
+"
+`;
+
+exports[`rollup-plugin-sizes single-entry, single-output bundle should show detailed output  1`] = `
+"Details for \\"bundle:\\"
+	bundle - 65 B (100.00%)
+		a.js - 44 B (67.69%)
+		b.js - 21 B (32.31%)
+"
+`;

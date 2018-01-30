@@ -5,37 +5,38 @@ var path = require("path"),
     each     = require("lodash.foreach"),
     sum      = require("lodash.sumby"),
     parse    = require("module-details-from-path"),
-    filesize = require("filesize");
+    filesize = require("filesize"),
+    slash    = require("slash");
 
 function defaultReport(details) {
     // Sort
-    details.totals.sort((a, b) => b.size - a.size);
+    details.log("Details for \"%s:\"", details.bundle);
     
-    details.log("%s:", details.input);
+    details.totals
+        .sort((a, b) => b.size - a.size)
+        .forEach((item) => {
+            details.log(
+                "\t%s - %s (%s%%)",
+                item.name,
+                filesize(item.size),
+                ((item.size / details.total) * 100).toFixed(2)
+            );
 
-    details.totals.forEach((item) => {
-        details.log(
-            "%s - %s (%s%%)",
-            item.name,
-            filesize(item.size),
-            ((item.size / details.total) * 100).toFixed(2)
-        );
-
-        if(details.options.details) {
-            details.data[item.name]
-                .sort((a, b) => b.size - a.size)
-                .forEach((file) => details.log(
-                    "\t%s - %s (%s%%)",
-                    file.path,
-                    filesize(file.size),
-                    ((file.size / item.size) * 100).toFixed(2)
-                ));
-        }
-    });
+            if(details.options.details) {
+                details.data[item.name]
+                    .sort((a, b) => b.size - a.size)
+                    .forEach((file) => details.log(
+                        "\t\t%s - %s (%s%%)",
+                        slash(file.path),
+                        filesize(file.size),
+                        ((file.size / item.size) * 100).toFixed(2)
+                    ));
+            }
+        });
 }
 
 module.exports = (options) => {
-    var input, base, report, log, output;
+    var report, log, output, opts;
 
     if(!options) {
         options = false;
@@ -49,8 +50,11 @@ module.exports = (options) => {
 
         // Grab some needed bits out of the options
         options : (config) => {
-            input = config.input;
-            base  = path.dirname(config.input);
+            opts = Object.assign(Object.create(null), config);
+
+            if(typeof opts.input === "string") {
+                opts.input = [ opts.input ];
+            }
         },
 
         // Don't actually provide a load hook, just use it to reset the output
@@ -63,11 +67,15 @@ module.exports = (options) => {
         ongenerate : (details) => {
             var data   = {},
                 totals = [],
-                total = 0;
+                total  = 0,
+                bundle = details.bundle.name || "bundle";
             
             if(output) {
                 return false;
             }
+
+            console.log(opts.input);
+            console.log(details.bundle);
 
             details.bundle.modules.forEach((module) => {
                 var parsed;
@@ -84,9 +92,9 @@ module.exports = (options) => {
 
                     if(!parsed) {
                         parsed = {
-                            name    : "app",
-                            basedir : base,
-                            path    : path.relative(base, module.id)
+                            name    : bundle,
+                            basedir : path.dirname(module.id),
+                            path    : path.basename(module.id)
                         };
                     }
                 }
@@ -110,15 +118,17 @@ module.exports = (options) => {
                 });
             });
 
-            output = true;
+            if(opts.input.length === 1) {
+                output = true;
+            }
 
             return report({
-                input,
                 data,
-                totals,
-                total,
+                log,
+                bundle,
                 options,
-                log
+                total,
+                totals
             });
         }
     };
