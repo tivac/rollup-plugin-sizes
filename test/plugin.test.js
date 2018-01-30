@@ -15,13 +15,13 @@ describe("rollup-plugin-sizes", () => {
 
     beforeEach(() => (out = ""));
     
-    describe("single-entry bundle", () => {
+    describe("single-entry, single-output bundle", () => {
         it("should show basic output", () =>
             rollup({
-                input : "./test/specimens/single-input-output/a.js",
+                input : "./test/specimens/1-to-1/a.js",
 
                 plugins : [
-                    require("../index.js")({
+                    plugin({
                         log
                     })
                 ]
@@ -32,10 +32,10 @@ describe("rollup-plugin-sizes", () => {
 
         it("should show detailed output ", () =>
             rollup({
-                input : "./test/specimens/single-input-output/a.js",
+                input : "./test/specimens/1-to-1/a.js",
 
                 plugins : [
-                    require("../index.js")({
+                    plugin({
                         log,
 
                         details : true
@@ -43,6 +43,44 @@ describe("rollup-plugin-sizes", () => {
                 ]
             })
             .then((bundle) => bundle.generate({ format : "es" }))
+            .then(() => expect(out).toMatchSnapshot())
+        );
+    });
+
+    describe("single-entry, multiple-output bundle", () => {
+        it("should show basic output", () =>
+            rollup({
+                input : "./test/specimens/1-to-many/a.js",
+
+                plugins : [
+                    plugin({
+                        log
+                    })
+                ]
+            })
+            .then((bundle) => Promise.all([
+                bundle.generate({ format : "es" }),
+                bundle.generate({ format : "cjs" })
+            ]))
+            .then(() => expect(out).toMatchSnapshot())
+        );
+
+        it("should show detailed output ", () =>
+            rollup({
+                input : "./test/specimens/1-to-many/a.js",
+
+                plugins : [
+                    plugin({
+                        log,
+
+                        details : true
+                    })
+                ]
+            })
+            .then((bundle) => Promise.all([
+                bundle.generate({ format : "es" }),
+                bundle.generate({ format : "cjs" })
+            ]))
             .then(() => expect(out).toMatchSnapshot())
         );
     });

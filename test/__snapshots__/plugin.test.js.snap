@@ -1,13 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`rollup-plugin-sizes single-entry bundle should show basic output 1`] = `
-"./test/specimens/single-input-output/a.js:
+exports[`rollup-plugin-sizes single-entry, multiple-output bundle should show basic output 1`] = `
+"./test/specimens/1-to-many/a.js:
+app - 65 B (100.00%)
+./test/specimens/1-to-many/a.js:
 app - 65 B (100.00%)
 "
 `;
 
-exports[`rollup-plugin-sizes single-entry bundle should show detailed output  1`] = `
-"./test/specimens/single-input-output/a.js:
+exports[`rollup-plugin-sizes single-entry, multiple-output bundle should show detailed output  1`] = `
+"./test/specimens/1-to-many/a.js:
+app - 65 B (100.00%)
+	a.js - 44 B (67.69%)
+	b.js - 21 B (32.31%)
+./test/specimens/1-to-many/a.js:
+app - 65 B (100.00%)
+	a.js - 44 B (67.69%)
+	b.js - 21 B (32.31%)
+"
+`;
+
+exports[`rollup-plugin-sizes single-entry, single-output bundle should show basic output 1`] = `
+"./test/specimens/1-to-1/a.js:
+app - 65 B (100.00%)
+"
+`;
+
+exports[`rollup-plugin-sizes single-entry, single-output bundle should show detailed output  1`] = `
+"./test/specimens/1-to-1/a.js:
 app - 65 B (100.00%)
 	a.js - 44 B (67.69%)
 	b.js - 21 B (32.31%)
