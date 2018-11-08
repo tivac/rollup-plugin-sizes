@@ -9,7 +9,7 @@ var path = require("path"),
 
 function defaultReport(details) {
     var args = Object.assign({}, details);
-    
+
     // Sort
     args.totals.sort((a, b) => b.size - a.size);
     console.log("%s:", args.input);
@@ -59,24 +59,25 @@ module.exports = (options) => {
                 totals = [],
                 total = 0;
 
-            details.bundle.modules.forEach((module) => {
+            Object.keys(details.bundle.modules).forEach(moduleId => {
+		var module = details.bundle.modules[moduleId];
                 var parsed;
 
                 // Handle rollup-injected helpers
-                if(module.id.indexOf("\u0000") === 0) {
+                if(moduleId.indexOf("\u0000") === 0) {
                     parsed = {
                         name    : "rollup helpers",
                         basedir : "",
-                        path    : module.id.replace("\u0000", "")
+                        path    : moduleId.replace("\u0000", "")
                     };
                 } else {
-                    parsed = parse(module.id);
+                    parsed = parse(moduleId);
 
                     if(!parsed) {
                         parsed = {
                             name    : "app",
                             basedir : base,
-                            path    : path.relative(base, module.id)
+                            path    : path.relative(base, moduleId)
                         };
                     }
                 }
@@ -85,7 +86,7 @@ module.exports = (options) => {
                     data[parsed.name] = [];
                 }
 
-                data[parsed.name].push(Object.assign(parsed, { size : module.code.length }));
+                data[parsed.name].push(Object.assign(parsed, { size : module.renderedLength }));
             });
 
             // Sum all files in each chunk
