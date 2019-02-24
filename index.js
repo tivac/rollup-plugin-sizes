@@ -1,44 +1,45 @@
 "use strict";
 
-var path = require("path"),
-
-    each     = require("lodash.foreach"),
-    sum      = require("lodash.sumby"),
-    parse    = require("module-details-from-path"),
-    filesize = require("filesize");
+const path = require("path");
+const each = require("lodash.foreach");
+const sum = require("lodash.sumby");
+const parse = require("module-details-from-path");
+const filesize = require("filesize");
 
 function defaultReport(details) {
-    var args = Object.assign({}, details);
-    
+    const args = Object.assign({}, details);
+
     // Sort
     args.totals.sort((a, b) => b.size - a.size);
     console.log("%s:", args.input);
 
     args.totals.forEach((item) => {
+        const itemSize = item.size || 0;
+
         console.log(
             "%s - %s (%s%%)",
             item.name,
-            filesize(item.size),
-            ((item.size / args.total) * 100).toFixed(2)
+            filesize(itemSize),
+            ((itemSize / args.total) * 100).toFixed(2)
         );
 
-        if(args.options.details) {
+        if (args.options.details) {
             args.data[item.name]
                 .sort((a, b) => b.size - a.size)
                 .forEach((file) => console.log(
                     "\t%s - %s (%s%%)",
                     file.path,
-                    filesize(file.size),
-                    ((file.size / item.size) * 100).toFixed(2)
+                    filesize(file.size || 0),
+                    ((file.size / itemSize) * 100).toFixed(2)
                 ));
         }
     });
 }
 
 module.exports = (options) => {
-    var input, base, report;
+    let input, base, report;
 
-    if(!options) {
+    if (!options) {
         options = false;
     }
 
@@ -50,47 +51,49 @@ module.exports = (options) => {
         // Grab some needed bits out of the options
         options : (config) => {
             input = config.input;
-            base  = path.dirname(config.input);
+            base = path.dirname(config.input);
         },
 
         // Spit out stats during bundle generation
         ongenerate : (details) => {
-            var data   = {},
-                totals = [],
-                total = 0;
+            let total = 0;
+            const data = {};
+            const totals = [];
+            const ids = Object.keys(details.bundle.modules);
 
-            details.bundle.modules.forEach((module) => {
-                var parsed;
+            ids.forEach((id) => {
+                const module = details.bundle.modules[id];
+                let parsed;
 
                 // Handle rollup-injected helpers
-                if(module.id.indexOf("\u0000") === 0) {
+                if (id.indexOf("\u0000") === 0) {
                     parsed = {
                         name    : "rollup helpers",
                         basedir : "",
-                        path    : module.id.replace("\u0000", "")
+                        path    : id.replace("\u0000", "")
                     };
                 } else {
-                    parsed = parse(module.id);
+                    parsed = parse(id);
 
-                    if(!parsed) {
+                    if (!parsed) {
                         parsed = {
                             name    : "app",
                             basedir : base,
-                            path    : path.relative(base, module.id)
+                            path    : path.relative(base, id)
                         };
                     }
                 }
 
-                if(!(parsed.name in data)) {
+                if (!(parsed.name in data)) {
                     data[parsed.name] = [];
                 }
 
-                data[parsed.name].push(Object.assign(parsed, { size : module.code.length }));
+                data[parsed.name].push(Object.assign(parsed, { size : module.originalLength }));
             });
 
             // Sum all files in each chunk
             each(data, (files, name) => {
-                var size = sum(files, "size");
+                const size = sum(files, "size");
 
                 total += size;
 
