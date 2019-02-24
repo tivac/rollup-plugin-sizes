@@ -1,14 +1,13 @@
 "use strict";
 
-var path = require("path"),
-
-    each = require("lodash.foreach"),
-    sum = require("lodash.sumby"),
-    parse = require("module-details-from-path"),
-    filesize = require("filesize");
+const path = require("path");
+const each = require("lodash.foreach");
+const sum = require("lodash.sumby");
+const parse = require("module-details-from-path");
+const filesize = require("filesize");
 
 function defaultReport(details) {
-    var args = Object.assign({}, details);
+    const args = Object.assign({}, details);
 
     // Sort
     args.totals.sort((a, b) => b.size - a.size);
@@ -16,6 +15,7 @@ function defaultReport(details) {
 
     args.totals.forEach((item) => {
         const itemSize = item.size || 0;
+
         console.log(
             "%s - %s (%s%%)",
             item.name,
@@ -37,7 +37,7 @@ function defaultReport(details) {
 }
 
 module.exports = (options) => {
-    var input, base, report;
+    let input, base, report;
 
     if (!options) {
         options = false;
@@ -46,40 +46,40 @@ module.exports = (options) => {
     report = (options && options.report) || defaultReport;
 
     return {
-        name: "rollup-plugin-sizes",
+        name : "rollup-plugin-sizes",
 
         // Grab some needed bits out of the options
-        options: (config) => {
+        options : (config) => {
             input = config.input;
             base = path.dirname(config.input);
         },
 
         // Spit out stats during bundle generation
-        ongenerate: (details) => {
-            var data = {},
-                totals = [],
-                total = 0,
-                ids = Object.keys(details.bundle.modules);
+        ongenerate : (details) => {
+            let total = 0;
+            const data = {};
+            const totals = [];
+            const ids = Object.keys(details.bundle.modules);
 
             ids.forEach((id) => {
                 const module = details.bundle.modules[id];
-                var parsed;
+                let parsed;
 
                 // Handle rollup-injected helpers
                 if (id.indexOf("\u0000") === 0) {
                     parsed = {
-                        name: "rollup helpers",
-                        basedir: "",
-                        path: id.replace("\u0000", "")
+                        name    : "rollup helpers",
+                        basedir : "",
+                        path    : id.replace("\u0000", "")
                     };
                 } else {
                     parsed = parse(id);
 
                     if (!parsed) {
                         parsed = {
-                            name: "app",
-                            basedir: base,
-                            path: path.relative(base, id)
+                            name    : "app",
+                            basedir : base,
+                            path    : path.relative(base, id)
                         };
                     }
                 }
@@ -88,12 +88,12 @@ module.exports = (options) => {
                     data[parsed.name] = [];
                 }
 
-                data[parsed.name].push(Object.assign(parsed, { size: module.originalLength }));
+                data[parsed.name].push(Object.assign(parsed, { size : module.originalLength }));
             });
 
             // Sum all files in each chunk
             each(data, (files, name) => {
-                var size = sum(files, "size");
+                const size = sum(files, "size");
 
                 total += size;
 

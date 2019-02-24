@@ -1,6 +1,6 @@
 "use strict";
 
-var rollup = require("rollup").rollup;
+const rollup = require("rollup").rollup;
 
 rollup({
     input : "./test/specimens/entry.js",
