@@ -10,7 +10,7 @@
   "scripts": {
     "lint": "eslint .",
     "release": "npm version -m \"v%s\"",
-    "test": "node ./test/test.js",
+    "test": "node ./test/test.js && npm run lint",
     "preversion": "npm test"
   },
   "keywords": [
@@ -22,8 +22,8 @@
   "author": "Pat Cavit <npm@patcavit.com>",
   "license": "MIT",
   "devDependencies": {
+    "@tivac/eslint-config": "^2.3.1",
     "eslint": "^5.14.1",
-    "eslint-config-arenanet": "^4.4.1",
     "rollup": "^1.2.2"
   },
   "dependencies": {
@@ -32,14 +32,7 @@
     "lodash.sumby": "^4.6.0",
     "module-details-from-path": "^1.0.3"
   },
-  "eslintConfig": {
-    "extends": "arenanet",
-    "env": {
-      "node": true
-    },
-    "rules": {
-      "no-console": "off",
-      "prefer-template": "off"
-    }
+  "peerDependencies": {
+    "rollup": "^1.0.0"
   }
 }
