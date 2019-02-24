@@ -1,6 +1,7 @@
+/* eslint-disable no-console */
 "use strict";
 
-const rollup = require("rollup").rollup;
+const { rollup } = require("rollup");
 
 rollup({
     input : "./test/specimens/entry.js",

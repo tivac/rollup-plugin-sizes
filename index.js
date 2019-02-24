@@ -1,6 +1,8 @@
+/* eslint-disable no-console */
 "use strict";
 
 const path = require("path");
+
 const each = require("lodash.foreach");
 const sum = require("lodash.sumby");
 const parse = require("module-details-from-path");
@@ -23,7 +25,7 @@ function defaultReport(details) {
             ((itemSize / args.total) * 100).toFixed(2)
         );
 
-        if (args.options.details) {
+        if(args.options.details) {
             args.data[item.name]
                 .sort((a, b) => b.size - a.size)
                 .forEach((file) => console.log(
@@ -37,13 +39,14 @@ function defaultReport(details) {
 }
 
 module.exports = (options) => {
-    let input, base, report;
+    let input;
+    let base;
 
-    if (!options) {
+    if(!options) {
         options = false;
     }
 
-    report = (options && options.report) || defaultReport;
+    const report = (options && options.report) || defaultReport;
 
     return {
         name : "rollup-plugin-sizes",
@@ -66,7 +69,7 @@ module.exports = (options) => {
                 let parsed;
 
                 // Handle rollup-injected helpers
-                if (id.indexOf("\u0000") === 0) {
+                if(id.indexOf("\u0000") === 0) {
                     parsed = {
                         name    : "rollup helpers",
                         basedir : "",
@@ -75,7 +78,7 @@ module.exports = (options) => {
                 } else {
                     parsed = parse(id);
 
-                    if (!parsed) {
+                    if(!parsed) {
                         parsed = {
                             name    : "app",
                             basedir : base,
@@ -84,7 +87,7 @@ module.exports = (options) => {
                     }
                 }
 
-                if (!(parsed.name in data)) {
+                if(!(parsed.name in data)) {
                     data[parsed.name] = [];
                 }
 
