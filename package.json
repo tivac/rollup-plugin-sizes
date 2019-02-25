@@ -28,8 +28,6 @@
   },
   "dependencies": {
     "filesize": "^4.1.2",
-    "lodash.foreach": "^4.5.0",
-    "lodash.sumby": "^4.6.0",
     "module-details-from-path": "^1.0.3"
   },
   "peerDependencies": {

@@ -3,8 +3,6 @@
 
 const path = require("path");
 
-const each = require("lodash.foreach");
-const sum = require("lodash.sumby");
 const parse = require("module-details-from-path");
 const filesize = require("filesize");
 
@@ -95,14 +93,14 @@ module.exports = (options) => {
             });
 
             // Sum all files in each chunk
-            each(data, (files, name) => {
-                const size = sum(files, "size");
+            Object.entries(data).forEach(([ name, files ]) => {
+                const sum = files.reduce((out, { size }) => out + size, 0);
 
-                total += size;
+                total += sum;
 
                 totals.push({
                     name,
-                    size
+                    size : sum
                 });
             });
 
