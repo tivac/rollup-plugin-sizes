@@ -56,7 +56,7 @@ module.exports = (options) => {
         },
 
         // Spit out stats during bundle generation
-        ongenerate : (details) => {
+        generateBundle : (details) => {
             let total = 0;
             const data = {};
             const totals = [];
