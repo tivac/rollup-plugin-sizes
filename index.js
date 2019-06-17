@@ -56,14 +56,17 @@ module.exports = (options) => {
         },
 
         // Spit out stats during bundle generation
-        ongenerate : (details) => {
+        generateBundle : (_, bundles) => {
+            const [ file ] = Object.keys(bundles);
+            const bundle = bundles[file];
+            
             let total = 0;
             const data = {};
             const totals = [];
-            const ids = Object.keys(details.bundle.modules);
+            const ids = Object.keys(bundle.modules);
 
             ids.forEach((id) => {
-                const module = details.bundle.modules[id];
+                const module = bundle.modules[id];
                 let parsed;
 
                 // Handle rollup-injected helpers
