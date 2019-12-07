@@ -21,7 +21,7 @@ describe("rollup-plugin-sizes", () => {
             "./test/specimens/entry2.js",
         ]],
         [ "multi-entry object", {
-            entry : "./test/specimens/entry.js",
+            entry  : "./test/specimens/entry.js",
             entry2 : "./test/specimens/entry2.js",
         }],
     ])("should describe the sizes of a bundle (%s)", async (name, input) => {
