@@ -38,7 +38,7 @@ function defaultReport(details) {
 
 module.exports = (options) => {
     let input;
-    let base;
+    let bases;
 
     if(!options) {
         options = false;
@@ -51,69 +51,79 @@ module.exports = (options) => {
 
         // Grab some needed bits out of the options
         options : (config) => {
-            input = config.input;
-            base = path.dirname(config.input);
+            const { input : original } = config;
+            
+            if(Array.isArray(original)) {
+                input = original;
+            } else if(typeof original === "object") {
+                input = Object.values(original);
+            } else {
+                input = [ original ];
+            }
+
+            bases = input.map((file) => path.dirname(file));
         },
 
         // Spit out stats during bundle generation
         generateBundle : (_, bundles) => {
-            const [ file ] = Object.keys(bundles);
-            const bundle = bundles[file];
-            
-            let total = 0;
-            const data = {};
-            const totals = [];
-            const ids = Object.keys(bundle.modules);
-
-            ids.forEach((id) => {
-                const module = bundle.modules[id];
-                let parsed;
-
-                // Handle rollup-injected helpers
-                if(id.indexOf("\u0000") === 0) {
-                    parsed = {
-                        name    : "rollup helpers",
-                        basedir : "",
-                        path    : id.replace("\u0000", "")
-                    };
-                } else {
-                    parsed = parse(id);
-
-                    if(!parsed) {
+            Object.values(bundles).forEach((bundle, idx) => {
+                const base = bases[idx];
+                
+                let total = 0;
+                const data = {};
+                const totals = [];
+                const ids = Object.keys(bundle.modules);
+    
+                ids.forEach((id) => {
+                    const module = bundle.modules[id];
+                    let parsed;
+    
+                    // Handle rollup-injected helpers
+                    if(id.indexOf("\u0000") === 0) {
                         parsed = {
-                            name    : "app",
-                            basedir : base,
-                            path    : path.relative(base, id)
+                            name    : "rollup helpers",
+                            basedir : "",
+                            path    : id.replace("\u0000", ""),
                         };
+                    } else {
+                        parsed = parse(id);
+    
+                        if(!parsed) {
+                            parsed = {
+                                name    : "app",
+                                basedir : base,
+                                path    : path.relative(base, id),
+                            };
+                        }
                     }
-                }
-
-                if(!(parsed.name in data)) {
-                    data[parsed.name] = [];
-                }
-
-                data[parsed.name].push(Object.assign(parsed, { size : module.originalLength }));
-            });
-
-            // Sum all files in each chunk
-            Object.entries(data).forEach(([ name, files ]) => {
-                const sum = files.reduce((out, { size }) => out + size, 0);
-
-                total += sum;
-
-                totals.push({
-                    name,
-                    size : sum
+    
+                    if(!(parsed.name in data)) {
+                        data[parsed.name] = [];
+                    }
+    
+                    data[parsed.name].push(Object.assign(parsed, { size : module.originalLength }));
+                });
+    
+                // Sum all files in each chunk
+                Object.entries(data).forEach(([ name, files ]) => {
+                    const sum = files.reduce((out, { size }) => out + size, 0);
+    
+                    total += sum;
+    
+                    totals.push({
+                        name,
+                        size : sum,
+                    });
+                });
+    
+                report({
+                    input : input[idx],
+                    data,
+                    totals,
+                    total,
+                    options,
                 });
             });
-
-            report({
-                input,
-                data,
-                totals,
-                total,
-                options
-            });
-        }
+        },
     };
 };
