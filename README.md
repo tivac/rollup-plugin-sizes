@@ -89,13 +89,3 @@ export default {
 `details` - Set to true to enable file-by-file breakdowns of space usage.
 
 `report` - Customize reporting. See [source code](index.js) for the default reporter.
-
-## A Note on Versioning
-
-This project's version number currently has a "0.x" prefix, indicating that it's a young
-project under heavy development. **As long as the version number starts with
-"0.x", minor revisions may introduce breaking changes.**
-
-You've been warned!
-
-Once it reaches version 1.0.0, it will adhere strictly to [SemVer 2.0](http://semver.org/spec/v2.0.0.html).
