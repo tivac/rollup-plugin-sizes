@@ -3,20 +3,42 @@
 
 const { rollup } = require("rollup");
 
-rollup({
-    input : "./test/specimens/entry.js",
+const plugin = require("../index.js");
 
-    plugins : [
-        require("../index.js")({
-            details : true
-        })
-    ]
-})
-.then((bundle) => {
-    bundle.generate({ format : "es" });
-})
-.catch((error) => {
-    console.error(error.toString());
+describe("rollup-plugin-sizes", () => {
+    let spy;
 
-    process.exitCode = 1;
+    beforeEach(() => {
+        spy = jest.spyOn(global.console, "log");
+
+        spy.mockImplementation(() => { /* NO-OP */ });
+    });
+
+    it.each([
+        [ "single entry", "./test/specimens/entry.js" ],
+        [ "multi-entry array", [
+            "./test/specimens/entry.js",
+            "./test/specimens/entry2.js",
+        ]],
+        [ "multi-entry object", {
+            entry : "./test/specimens/entry.js",
+            entry2 : "./test/specimens/entry2.js",
+        }],
+    ])("should describe the sizes of a bundle (%s)", async (name, input) => {
+        const bundle = await rollup({
+            input,
+        
+            plugins : [
+                plugin({
+                    details : true,
+                }),
+            ],
+        });
+
+        await bundle.generate({ format : "es" });
+
+        expect(spy).toHaveBeenCalled();
+        expect(spy.mock.calls).toMatchSnapshot();
+    });
 });
+

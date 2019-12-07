@@ -1,0 +1,214 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rollup-plugin-sizes should describe the sizes of a bundle (multi-entry array) 1`] = `
+Array [
+  Array [
+    "%s:",
+    "./test/specimens/entry.js",
+  ],
+  Array [
+    "%s - %s (%s%%)",
+    "app",
+    "360 B",
+    "100.00",
+  ],
+  Array [
+    "	%s - %s (%s%%)",
+    "maths.js",
+    "288 B",
+    "80.00",
+  ],
+  Array [
+    "	%s - %s (%s%%)",
+    "entry.js",
+    "72 B",
+    "20.00",
+  ],
+  Array [
+    "%s:",
+    "./test/specimens/entry.js",
+  ],
+  Array [
+    "%s - %s (%s%%)",
+    "app",
+    "360 B",
+    "100.00",
+  ],
+  Array [
+    "	%s - %s (%s%%)",
+    "maths.js",
+    "288 B",
+    "80.00",
+  ],
+  Array [
+    "	%s - %s (%s%%)",
+    "entry.js",
+    "72 B",
+    "20.00",
+  ],
+  Array [
+    "%s:",
+    "./test/specimens/entry2.js",
+  ],
+  Array [
+    "%s - %s (%s%%)",
+    "app",
+    "361 B",
+    "100.00",
+  ],
+  Array [
+    "	%s - %s (%s%%)",
+    "maths2.js",
+    "288 B",
+    "79.78",
+  ],
+  Array [
+    "	%s - %s (%s%%)",
+    "entry2.js",
+    "73 B",
+    "20.22",
+  ],
+]
+`;
+
+exports[`rollup-plugin-sizes should describe the sizes of a bundle (multi-entry object) 1`] = `
+Array [
+  Array [
+    "%s:",
+    "./test/specimens/entry.js",
+  ],
+  Array [
+    "%s - %s (%s%%)",
+    "app",
+    "360 B",
+    "100.00",
+  ],
+  Array [
+    "	%s - %s (%s%%)",
+    "maths.js",
+    "288 B",
+    "80.00",
+  ],
+  Array [
+    "	%s - %s (%s%%)",
+    "entry.js",
+    "72 B",
+    "20.00",
+  ],
+  Array [
+    "%s:",
+    "./test/specimens/entry.js",
+  ],
+  Array [
+    "%s - %s (%s%%)",
+    "app",
+    "360 B",
+    "100.00",
+  ],
+  Array [
+    "	%s - %s (%s%%)",
+    "maths.js",
+    "288 B",
+    "80.00",
+  ],
+  Array [
+    "	%s - %s (%s%%)",
+    "entry.js",
+    "72 B",
+    "20.00",
+  ],
+  Array [
+    "%s:",
+    "./test/specimens/entry2.js",
+  ],
+  Array [
+    "%s - %s (%s%%)",
+    "app",
+    "361 B",
+    "100.00",
+  ],
+  Array [
+    "	%s - %s (%s%%)",
+    "maths2.js",
+    "288 B",
+    "79.78",
+  ],
+  Array [
+    "	%s - %s (%s%%)",
+    "entry2.js",
+    "73 B",
+    "20.22",
+  ],
+  Array [
+    "%s:",
+    "./test/specimens/entry.js",
+  ],
+  Array [
+    "%s - %s (%s%%)",
+    "app",
+    "360 B",
+    "100.00",
+  ],
+  Array [
+    "	%s - %s (%s%%)",
+    "maths.js",
+    "288 B",
+    "80.00",
+  ],
+  Array [
+    "	%s - %s (%s%%)",
+    "entry.js",
+    "72 B",
+    "20.00",
+  ],
+  Array [
+    "%s:",
+    "./test/specimens/entry2.js",
+  ],
+  Array [
+    "%s - %s (%s%%)",
+    "app",
+    "361 B",
+    "100.00",
+  ],
+  Array [
+    "	%s - %s (%s%%)",
+    "maths2.js",
+    "288 B",
+    "79.78",
+  ],
+  Array [
+    "	%s - %s (%s%%)",
+    "entry2.js",
+    "73 B",
+    "20.22",
+  ],
+]
+`;
+
+exports[`rollup-plugin-sizes should describe the sizes of a bundle (single entry) 1`] = `
+Array [
+  Array [
+    "%s:",
+    "./test/specimens/entry.js",
+  ],
+  Array [
+    "%s - %s (%s%%)",
+    "app",
+    "360 B",
+    "100.00",
+  ],
+  Array [
+    "	%s - %s (%s%%)",
+    "maths.js",
+    "288 B",
+    "80.00",
+  ],
+  Array [
+    "	%s - %s (%s%%)",
+    "entry.js",
+    "72 B",
+    "20.00",
+  ],
+]
+`;
