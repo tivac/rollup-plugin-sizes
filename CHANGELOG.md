@@ -1,0 +1,66 @@
+## [0.5.1](https://github.com/tivac/rollup-plugin-sizes/compare/v0.5.0...v0.5.1) (2019-02-25)
+
+
+
+# [0.5.0](https://github.com/tivac/rollup-plugin-sizes/compare/v0.4.2...v0.5.0) (2019-02-25)
+
+
+### Bug Fixes
+
+* compatiblity with rollup 1.x ([#11](https://github.com/tivac/rollup-plugin-sizes/issues/11)) ([3dbb2fe](https://github.com/tivac/rollup-plugin-sizes/commit/3dbb2fe5a9ffc25aca3b2af564b58e8122c5ea10))
+
+
+
+## [0.4.2](https://github.com/tivac/rollup-plugin-sizes/compare/v0.4.1...v0.4.2) (2017-11-01)
+
+
+
+## [0.4.1](https://github.com/tivac/rollup-plugin-sizes/compare/v0.4.0...v0.4.1) (2017-11-01)
+
+
+### Bug Fixes
+
+* Replace 'entry' with 'input' ([#5](https://github.com/tivac/rollup-plugin-sizes/issues/5)) ([8ae4f50](https://github.com/tivac/rollup-plugin-sizes/commit/8ae4f50c1a118eb6e28e3463969356200de0383c))
+
+
+
+# [0.4.0](https://github.com/tivac/rollup-plugin-sizes/compare/v0.3.0...v0.4.0) (2017-06-17)
+
+
+
+# [0.3.0](https://github.com/tivac/rollup-plugin-sizes/compare/v0.2.3...v0.3.0) (2017-06-17)
+
+
+### Bug Fixes
+
+* disable eslint for now ([9a4f0e4](https://github.com/tivac/rollup-plugin-sizes/commit/9a4f0e4bdd4a88f63d1445147bb649c79a844976))
+* reflect latest commonjs changes, more accurate totals ([793565f](https://github.com/tivac/rollup-plugin-sizes/commit/793565f84f842fdd868adc49295000dfe55454e8)), closes [#2](https://github.com/tivac/rollup-plugin-sizes/issues/2)
+* remove object destructuring ([03966c1](https://github.com/tivac/rollup-plugin-sizes/commit/03966c1f52ba7ad3aa1b73a15933dd14c1fb0ded))
+
+
+### Features
+
+* Custom reporter support ([#3](https://github.com/tivac/rollup-plugin-sizes/issues/3)) ([7505a7e](https://github.com/tivac/rollup-plugin-sizes/commit/7505a7ee36a3a3bcd0ceee3c1563e0803e7da9ee))
+
+
+
+## [0.2.3](https://github.com/tivac/rollup-plugin-sizes/compare/v0.2.2...v0.2.3) (2016-08-16)
+
+
+
+## [0.2.2](https://github.com/tivac/rollup-plugin-sizes/compare/v0.2.1...v0.2.2) (2016-08-16)
+
+
+
+## [0.2.1](https://github.com/tivac/rollup-plugin-sizes/compare/v0.2.0...v0.2.1) (2016-08-16)
+
+
+
+# [0.2.0](https://github.com/tivac/rollup-plugin-sizes/compare/v0.1.0...v0.2.0) (2016-08-16)
+
+
+
+# 0.1.0 (2016-08-16)
+
+
+

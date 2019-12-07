@@ -9,9 +9,11 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "release": "npm version -m \"v%s\"",
     "test": "jest",
-    "preversion": "npm test"
+    "release": "npm version",
+    "preversion": "npm test",
+    "version": "conventional-changelog --preset angular --infile CHANGELOG.md --same-file && git add CHANGELOG.md",
+    "postversion": "git push --follow-tags && npm publish"
   },
   "keywords": [
     "rollup",
@@ -23,6 +25,7 @@
   "license": "MIT",
   "devDependencies": {
     "@tivac/eslint-config": "^2.3.1",
+    "conventional-changelog-cli": "^2.0.28",
     "eslint": "^6.1.0",
     "jest": "^24.9.0",
     "rollup": "^1.27.8"
