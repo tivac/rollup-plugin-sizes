@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-sizes",
-  "version": "0.5.1",
+  "version": "1.0.0",
   "description": "Show info about files/packages included with your rollup bundle",
   "main": "index.js",
   "repository": "tivac/rollup-plugin-sizes",

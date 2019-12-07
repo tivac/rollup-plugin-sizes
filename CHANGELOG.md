@@ -1,3 +1,18 @@
+# [1.0.0](https://github.com/tivac/rollup-plugin-sizes/compare/v0.5.1...v1.0.0) (2019-12-07)
+
+
+### Features
+
+* better multi-bundle support ([78be22b](https://github.com/tivac/rollup-plugin-sizes/commit/78be22b36dae28f42f9fe0433746aa43c8bf678d))
+* update deprecated ongenerate hook to generateBundle ([#15](https://github.com/tivac/rollup-plugin-sizes/issues/15)) ([f2df7a8](https://github.com/tivac/rollup-plugin-sizes/commit/f2df7a8fec379a839c9ec0762be548a3ed438449))
+
+
+### BREAKING CHANGES
+
+* rollup@1 is required to use the generateBundle hook
+
+
+
 ## [0.5.1](https://github.com/tivac/rollup-plugin-sizes/compare/v0.5.0...v0.5.1) (2019-02-25)
 
 
