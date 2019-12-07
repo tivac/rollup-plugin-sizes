@@ -1,3 +1,7 @@
+## [1.0.1](https://github.com/tivac/rollup-plugin-sizes/compare/v1.0.0...v1.0.1) (2019-12-07)
+
+
+
 # [1.0.0](https://github.com/tivac/rollup-plugin-sizes/compare/v0.5.1...v1.0.0) (2019-12-07)
 
 
