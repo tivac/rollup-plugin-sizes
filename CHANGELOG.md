@@ -1,3 +1,12 @@
+## [1.0.2](https://github.com/tivac/rollup-plugin-sizes/compare/v1.0.1...v1.0.2) (2020-03-18)
+
+
+### Bug Fixes
+
+* missing module property doesn't explode [#40](https://github.com/tivac/rollup-plugin-sizes/issues/40) ([#41](https://github.com/tivac/rollup-plugin-sizes/issues/41)) ([6e16c49](https://github.com/tivac/rollup-plugin-sizes/commit/6e16c4980745e1567eea133a65d343af14d68d46))
+
+
+
 ## [1.0.1](https://github.com/tivac/rollup-plugin-sizes/compare/v1.0.0...v1.0.1) (2019-12-07)
 
 
