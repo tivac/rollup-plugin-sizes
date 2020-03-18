@@ -52,7 +52,7 @@ module.exports = (options) => {
         // Grab some needed bits out of the options
         options : (config) => {
             const { input : original } = config;
-            
+
             if(Array.isArray(original)) {
                 input = original;
             } else if(typeof original === "object") {
@@ -67,17 +67,21 @@ module.exports = (options) => {
         // Spit out stats during bundle generation
         generateBundle : (_, bundles) => {
             Object.values(bundles).forEach((bundle, idx) => {
+                if (!bundle.modules) {
+                    return;
+                }
+
                 const base = bases[idx];
-                
+
                 let total = 0;
                 const data = {};
                 const totals = [];
                 const ids = Object.keys(bundle.modules);
-    
+
                 ids.forEach((id) => {
                     const module = bundle.modules[id];
                     let parsed;
-    
+
                     // Handle rollup-injected helpers
                     if(id.indexOf("\u0000") === 0) {
                         parsed = {
@@ -87,7 +91,7 @@ module.exports = (options) => {
                         };
                     } else {
                         parsed = parse(id);
-    
+
                         if(!parsed) {
                             parsed = {
                                 name    : "app",
@@ -96,26 +100,26 @@ module.exports = (options) => {
                             };
                         }
                     }
-    
+
                     if(!(parsed.name in data)) {
                         data[parsed.name] = [];
                     }
-    
+
                     data[parsed.name].push(Object.assign(parsed, { size : module.originalLength }));
                 });
-    
+
                 // Sum all files in each chunk
                 Object.entries(data).forEach(([ name, files ]) => {
                     const sum = files.reduce((out, { size }) => out + size, 0);
-    
+
                     total += sum;
-    
+
                     totals.push({
                         name,
                         size : sum,
                     });
                 });
-    
+
                 report({
                     input : input[idx],
                     data,
