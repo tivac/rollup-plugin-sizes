@@ -3,7 +3,7 @@ module.exports = {
         "@tivac",
     ],
 
-    parserOptions: {
+    parserOptions : {
         ecmaVersion : 2017,
     },
 
