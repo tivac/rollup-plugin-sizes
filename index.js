@@ -67,7 +67,7 @@ module.exports = (options) => {
         // Spit out stats during bundle generation
         generateBundle : (_, bundles) => {
             Object.values(bundles).forEach((bundle, idx) => {
-                if (!bundle.modules) {
+                if(!bundle.modules) {
                     return;
                 }
 
