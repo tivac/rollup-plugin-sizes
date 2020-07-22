@@ -1,4 +1,4 @@
-rollup-plugin-sizes [![NPM Version](https://img.shields.io/npm/v/rollup-plugin-sizes.svg)](https://www.npmjs.com/package/rollup-plugin-sizes) [![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Ftivac%2Frollup-plugin-sizes%2Fbadge%3Fref%3Dmaster&style=flat)](https://actions-badge.atrox.dev/tivac/rollup-plugin-sizes/goto?ref=master)
+rollup-plugin-sizes [![NPM Version](https://img.shields.io/npm/v/rollup-plugin-sizes.svg)](https://www.npmjs.com/package/rollup-plugin-sizes) [![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Ftivac%2Frollup-plugin-sizes%2Fbadge%3Fref%3Dmaster&style=flat)](https://actions-badge.atrox.dev/tivac/rollup-plugin-sizes/goto?ref=main)
 ===========
 <p align="center">
     <a href="https://www.npmjs.com/package/rollup-plugin-sizes" alt="NPM License"><img src="https://img.shields.io/npm/l/rollup-plugin-sizes.svg" /></a>
