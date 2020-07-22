@@ -24,7 +24,7 @@ jobs:
     
     strategy:
       matrix:
-        node_version: [ 10, 12 ]
+        node_version: [ 10, 12, 14 ]
         os: [ ubuntu-latest, windows-latest, macos-latest ]
 
     steps:
@@ -42,12 +42,12 @@ jobs:
 
     # Run codecov after all builds, and only on a single environment
     - name: Gather Coverage
-      if: matrix.os == 'ubuntu-latest' && matrix.node_version == '12'
+      if: matrix.os == 'ubuntu-latest' && matrix.node_version == '14'
       run: npm test -- --ci --coverage
     
     - name: Upload Coverage
       uses: codecov/codecov-action@v1.0.2
-      if: matrix.os == 'ubuntu-latest' && matrix.node_version == '12'
+      if: matrix.os == 'ubuntu-latest' && matrix.node_version == '14'
       with:
         token: ${{secrets.CODECOV_TOKEN}}
         file: ./coverage/coverage-final.json
