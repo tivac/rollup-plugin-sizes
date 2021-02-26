@@ -71,7 +71,7 @@ module.exports = (options) => {
                     return;
                 }
 
-                const base = bases[idx];
+                const base = bases[idx] || "";
 
                 let total = 0;
                 const data = {};
@@ -121,7 +121,7 @@ module.exports = (options) => {
                 });
 
                 report({
-                    input : input[idx],
+                    input : input[idx] || bundle.fileName,
                     data,
                     totals,
                     total,
