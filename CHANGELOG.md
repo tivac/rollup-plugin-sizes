@@ -1,3 +1,12 @@
+## [1.0.4](https://github.com/tivac/rollup-plugin-sizes/compare/v1.0.3...v1.0.4) (2021-02-26)
+
+
+### Bug Fixes
+
+* don't crash when module doesn't map to an input ([#76](https://github.com/tivac/rollup-plugin-sizes/issues/76)) ([881eada](https://github.com/tivac/rollup-plugin-sizes/commit/881eada617a03765dfd0d7e5413b3b364b12650d))
+
+
+
 ## [1.0.3](https://github.com/tivac/rollup-plugin-sizes/compare/v1.0.2...v1.0.3) (2020-07-22)
 
 
