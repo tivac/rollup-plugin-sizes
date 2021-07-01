@@ -27,7 +27,7 @@
     "@tivac/eslint-config": "^2.3.1",
     "conventional-changelog-cli": "^2.0.28",
     "eslint": "^7.1.0",
-    "jest": "^26.0.1",
+    "jest": "^27.0.6",
     "rollup": "^2.21.0"
   },
   "dependencies": {
