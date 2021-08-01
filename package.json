@@ -31,7 +31,7 @@
     "rollup": "^2.21.0"
   },
   "dependencies": {
-    "filesize": "^6.0.1",
+    "filesize": "^7.0.0",
     "module-details-from-path": "^1.0.3"
   },
   "peerDependencies": {
