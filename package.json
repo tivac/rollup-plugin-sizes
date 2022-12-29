@@ -24,6 +24,7 @@
   "author": "Pat Cavit <npm@patcavit.com>",
   "license": "MIT",
   "devDependencies": {
+    "@changesets/cli": "^2.26.0",
     "@tivac/eslint-config": "^2.3.1",
     "conventional-changelog-cli": "^2.0.28",
     "eslint": "^8.1.0",
