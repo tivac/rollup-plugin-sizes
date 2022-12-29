@@ -1,10 +1,10 @@
-## [1.0.4](https://github.com/tivac/rollup-plugin-sizes/compare/v1.0.3...v1.0.4) (2021-02-26)
-
 ## 1.0.5
 
 ### Patch Changes
 
 - [#143](https://github.com/tivac/rollup-plugin-sizes/pull/143) [`79ceac1`](https://github.com/tivac/rollup-plugin-sizes/commit/79ceac1a68c0b2a1372525983dac3f9f3b02fafc) Thanks [@tivac](https://github.com/tivac)! - Add support for `rollup@3`
+
+## [1.0.4](https://github.com/tivac/rollup-plugin-sizes/compare/v1.0.3...v1.0.4) (2021-02-26)
 
 ### Bug Fixes
 
