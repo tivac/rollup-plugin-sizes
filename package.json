@@ -33,6 +33,6 @@
     "module-details-from-path": "^1.0.3"
   },
   "peerDependencies": {
-    "rollup": "^2 || ^3"
+    "rollup": "^2 || ^3 || ^4"
   }
 }
