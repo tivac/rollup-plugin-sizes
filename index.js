@@ -57,6 +57,8 @@ module.exports = (options) => {
                 input = original;
             } else if(typeof original === "object") {
                 input = Object.values(original);
+            } else if(typeof original === "undefined") {
+                input = [];
             } else {
                 input = [ original ];
             }
