@@ -1,5 +1,11 @@
 ## 1.0.5
 
+## 1.1.0
+
+### Minor Changes
+
+- [#202](https://github.com/tivac/rollup-plugin-sizes/pull/202) [`a9db23c`](https://github.com/tivac/rollup-plugin-sizes/commit/a9db23c525cf9fab79eae8d16d11dcdb41c0bd50) Thanks [@dreuter](https://github.com/dreuter)! - Made this plugin compatible with `vite`
+
 ## 1.0.6
 
 ### Patch Changes
